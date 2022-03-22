@@ -2,6 +2,7 @@ description: The payment gateway name.
 type: string
 enum:
   - A1Gateway
+  - ACI
   - Adyen
   - Airpay
   - AmazonPay
@@ -81,6 +82,8 @@ enum:
   - Konnektive
   - loonie
   - LPG
+  - MaxiCash
+  - MercadoPago
   - MiFinity
   - Moneris
   - MtaPay
@@ -148,7 +151,6 @@ enum:
   - TestProcessor
   - ToditoCash
   - Truevo
-  - TrustPay
   - TrustsPay
   - Trustly
   - TWINT
@@ -159,6 +161,7 @@ enum:
   - VCreditos
   - Wallet88
   - Walpay
+  - WesternUnion
   - Wirecard
   - WorldlineAtosFrankfurt
   - Worldpay

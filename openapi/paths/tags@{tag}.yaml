@@ -1,6 +1,5 @@
 parameters:
   - $ref: ../components/parameters/tag.yaml
-  - $ref: ../components/parameters/organizationId.yaml
 get:
   x-products:
     - Full
@@ -37,7 +36,7 @@ patch:
   description: |
     Update a tag.
   requestBody:
-    $ref: ../components/requestBodies/Tag.yaml
+    $ref: ../components/requestBodies/UpdateTag.yaml
   responses:
     '200':
       description: Tag was updated.

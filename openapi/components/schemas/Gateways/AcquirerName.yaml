@@ -2,6 +2,7 @@ description: The acquirer name.
 type: string
 enum:
   - Adyen
+  - ACI
   - Alipay
   - AIB
   - Airpay
@@ -83,6 +84,8 @@ enum:
   - loonie
   - LPG
   - Masapay
+  - MaxiCash
+  - MercadoPago
   - Merrick
   - Mission Valley Bank
   - MiFinity

@@ -29,7 +29,7 @@ get:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/Organization.yaml
+              $ref: ../components/schemas/Organizations/Organization.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -53,17 +53,13 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Organization.yaml
+            $ref: ../components/schemas/Organizations/Organization.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '409':
-      description: The similar organization already exists.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Error.yaml
+      $ref: ../components/responses/Conflict.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:

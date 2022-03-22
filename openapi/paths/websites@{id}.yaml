@@ -1,5 +1,4 @@
 parameters:
-  - $ref: ../components/parameters/organizationId.yaml
   - $ref: ../components/parameters/resourceId.yaml
 get:
   x-products:
@@ -22,7 +21,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Website.yaml
+            $ref: ../components/schemas/Websites/Website.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -55,13 +54,13 @@ put:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Website.yaml
+            $ref: ../components/schemas/Websites/Website.yaml
     '201':
       description: Website was created.
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Website.yaml
+            $ref: ../components/schemas/Websites/Website.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -69,11 +68,7 @@ put:
     '404':
       $ref: ../components/responses/NotFound.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   x-codeSamples:
     - lang: PHP
       source:
@@ -102,7 +97,7 @@ delete:
     '404':
       $ref: ../components/responses/NotFound.yaml
     '409':
-      description: Website has related resources and cannot be deleted.
+      $ref: ../components/responses/Conflict.yaml
   x-codeSamples:
     - lang: PHP
       source:

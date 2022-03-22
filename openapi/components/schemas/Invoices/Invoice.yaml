@@ -28,6 +28,10 @@ allOf:
                   $ref: ../Scheduling/InvoiceRetryScheduleInstruction.yaml
                 amountAdjustmentInstruction:
                   $ref: ../InvoiceRetry/InvoiceRetryAmountAdjustmentInstruction.yaml
+                tryBackupInstruments:
+                  description: Whether to use backup payment instruments on invoice payment retry or not.
+                  type: boolean
+                  default: false
               required:
                 - scheduleInstruction
           afterAttemptPolicies:
@@ -68,6 +72,7 @@ allOf:
           - one-time
           - refund
           - charge
+          - one-time-sale
         readOnly: true
       dueReminderTime:
         description: Time past due reminder event will be triggered.
@@ -76,6 +81,7 @@ allOf:
           - $ref: ../ServerTimestamp.yaml
       dueReminderNumber:
         description: Number of past due reminder events triggered.
+        nullable: true
         type: integer
         readOnly: true
       _links:
@@ -106,3 +112,4 @@ allOf:
             - $ref: ../Embeds/WebsiteEmbed.yaml
             - $ref: ../Embeds/OrganizationEmbed.yaml
             - $ref: ../Embeds/LeadSourceEmbed.yaml
+            - $ref: ../Embeds/ShippingRateEmbed.yaml

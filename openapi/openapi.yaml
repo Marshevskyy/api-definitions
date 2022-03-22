@@ -22,21 +22,17 @@ security:
 
 servers:
   - url: 'https://api-sandbox.rebilly.com/organizations/{organizationId}'
-    description: Sandbox server with organizationId.
+    description: Sandbox server
     variables:
       organizationId:
         default: unknown
         description: Your organization ID.
   - url: 'https://api.rebilly.com/organizations/{organizationId}'
-    description: Live server with organizationId.
+    description: Live server
     variables:
       organizationId:
         default: unknown
         description: Your organization ID.
-  - url: 'https://api-sandbox.rebilly.com'
-    description: Sandbox Server.
-  - url: 'https://api.rebilly.com'
-    description: Live Server.
 
 components:
   securitySchemes:
@@ -95,8 +91,19 @@ tags:
       The gateway accounts timeline keeps an audit trail of changes and activity for each gateway account.
   - name: KYC Documents
     description: >
-      Customer KYC files uploaded on behalf of a customer, tagged with a
-      document type and submitted for validation.
+      Request KYC documents from customers using the KYC request API which generates a signed link to the KYC document gatherer.
+      The types of documents to request:
+        - identity-proof
+        - address-proof
+        - purchase-proof
+        - funds-proof
+        - credit-file-proof
+
+      In the case that a `credit-file-proof` is requested in combination with `identity-proof` and `address-proof`, the `credit-file-proof` is attempted first.
+      If it is successful in validating the identity and address, then the KYC request is considered instantly fulfilled.
+      If it is not, or if you the `credit-file-proof` isn't requested, then redirect your customer to the KYC document gatherer to collect their KYC documents.
+      Rebilly parses and analyzes the documents and accepts or rejects them according to a configurable scoring algorithm.
+      When all of the document types in the KYC request are accepted, the status is considered fulfilled and the KYC request fulfilled webhook will be emitted.
   - name: Customer Authentication
     description: >
       Create authentication credentials, login, logout, and verify your
@@ -182,15 +189,9 @@ tags:
   - name: Search
     description: |
       Search data including customers, invoices, orders, transactions and more.
-  - name: Shipping Zones
-    description: >
-      A shipping zone contains regions and countries that you ship to. Each
-      shipping zone has its own shipping rates.
-
-      This API is deprecated, see Shipping rates.
   - name: Shipping rates
     description: >
-      A shipping rate contains a filter and a pricing for a specific destination you ship to.
+      A shipping rate contains a filter and a pricing for a specific shipping destination.
   - name: Orders
     description: >
       An order applies a plan's template to create invoice(s) for a customer,
@@ -348,6 +349,10 @@ tags:
     description: |
       The Rebilly Reporting API is currently experimental.  You may see
       the [Reports API Documentation here](https://reports-api-docs.rebilly.com).
+  - name: Storefront API
+    description: |
+      The Rebilly Storefront API is currently experimental.  You may see
+      the [Storefront API Documentation here](https://storefront-api-docs.rebilly.com/).
   - name: Users API
     description: >
       The Rebilly User API is primarily for our GUI apps.  You may see
@@ -420,6 +425,8 @@ paths:
     $ref: './paths/customer-timeline-custom-events@{id}.yaml'
   /customer-timeline-events:
     $ref: ./paths/customer-timeline-events.yaml
+  '/customers/{id}/aml':
+    $ref: './paths/customers@{id}@aml.yaml'
   '/customers/{id}/lead-source':
     $ref: './paths/customers@{id}@lead-source.yaml'
   '/customers/{id}/timeline':
@@ -476,6 +483,10 @@ paths:
     $ref: './paths/invoices@{id}@timeline.yaml'
   '/invoices/{id}/timeline/{messageId}':
     $ref: './paths/invoices@{id}@timeline@{messageId}.yaml'
+  /kyc-requests:
+    $ref: ./paths/kyc-requests.yaml
+  '/kyc-requests/{id}':
+    $ref: './paths/kyc-requests@{id}.yaml'
   /kyc-documents:
     $ref: ./paths/kyc-documents.yaml
   '/kyc-documents/{id}':
@@ -492,10 +503,6 @@ paths:
     $ref: './paths/kyc-documents@{id}@start-review.yaml'
   '/kyc-documents/{id}/stop-review':
     $ref: './paths/kyc-documents@{id}@stop-review.yaml'
-  /kyc-requests:
-    $ref: ./paths/kyc-requests.yaml
-  '/kyc-requests/{id}':
-    $ref: './paths/kyc-requests@{id}.yaml'
   /password-tokens:
     $ref: ./paths/password-tokens.yaml
   '/password-tokens/{id}':
@@ -522,18 +529,20 @@ paths:
     $ref: ./paths/shipping-rates.yaml
   '/shipping-rates/{id}':
     $ref: './paths/shipping-rates@{id}.yaml'
-  /shipping-zones:
-    $ref: ./paths/shipping-zones.yaml
-  '/shipping-zones/{id}':
-    $ref: './paths/shipping-zones@{id}.yaml'
   /subscriptions:
     $ref: ./paths/subscriptions.yaml
   '/subscriptions/{id}':
     $ref: './paths/subscriptions@{id}.yaml'
+  '/subscriptions/{id}/void':
+    $ref: './paths/subscriptions@{id}@void.yaml'
   '/subscriptions/{id}/change-items':
     $ref: './paths/subscriptions@{id}@change-items.yaml'
   '/subscriptions/{id}/interim-invoice':
     $ref: './paths/subscriptions@{id}@interim-invoice.yaml'
+  /subscription-pauses:
+    $ref: ./paths/subscription-pauses.yaml
+  '/subscription-pauses/{id}':
+    $ref: './paths/subscription-pauses@{id}.yaml'
   /subscription-cancellations:
     $ref: ./paths/subscription-cancellations.yaml
   '/subscription-cancellations/{id}':
@@ -558,6 +567,10 @@ paths:
     $ref: './paths/tags@{tag}@customers.yaml'
   '/tags/{tag}/customers/{customerId}':
     $ref: './paths/tags@{tag}@customers@{customerId}.yaml'
+  '/tags/{tag}/kyc-documents':
+    $ref: './paths/tags@{tag}@kyc-documents.yaml'
+  '/tags/{tag}/kyc-documents/{kycDocumentId}':
+    $ref: './paths/tags@{tag}@kyc-documents@{kycDocumentId}.yaml'
   /tokens:
     $ref: ./paths/tokens.yaml
   '/tokens/{token}':
@@ -581,9 +594,9 @@ paths:
   '/transactions/{id}/timeline/{messageId}':
     $ref: './paths/transactions@{id}@timeline@{messageId}.yaml'
   '/fees':
-    $ref: './paths/fees/fees.yaml'
+    $ref: './paths/fees.yaml'
   '/fees/{id}':
-    $ref: './paths/fees/fees@{id}.yaml'
+    $ref: './paths/fees@{id}.yaml'
   '/activation/{token}':
     $ref: './paths/activation@{token}.yaml'
   /api-keys:
@@ -834,6 +847,10 @@ paths:
     $ref: ./paths/reports@events-triggered@{eventType}@rules.yaml
   /experimental/reports/future-renewals:
     $ref: ./paths/reports@future-renewals.yaml
+  /experimental/reports/kyc-acceptance-summary:
+    $ref: ./paths/reports@kyc-acceptance-summary.yaml
+  /experimental/reports/kyc-rejection-summary:
+    $ref: ./paths/reports@kyc-rejection-summary.yaml
   /experimental/reports/renewal-sales:
     $ref: ./paths/reports@renewal-sales.yaml
   /experimental/reports/retention-percentage:
@@ -931,6 +948,9 @@ x-webhooks:
   aml-list-possibly-matched:
     post:
       $ref: ./webhooks/aml-list-possibly-matched.yaml
+  balance-transaction-settled:
+    post:
+      $ref: ./webhooks/balance-transaction-settled.yaml
   customer-created:
     post:
       $ref: ./webhooks/customer-created.yaml
@@ -1021,6 +1041,9 @@ x-webhooks:
   kyc-document-reviewed:
     post:
       $ref: ./webhooks/kyc-document-reviewed.yaml
+  kyc-request-fulfilled:
+    post:
+      $ref: ./webhooks/kyc-request-fulfilled.yaml
   nsf-response-received:
     post:
       $ref: ./webhooks/nsf-response-received.yaml
@@ -1057,6 +1080,9 @@ x-webhooks:
   subscription-canceled:
     post:
       $ref: ./webhooks/subscription-canceled.yaml
+  subscription-downgraded:
+    post:
+      $ref: ./webhooks/subscription-downgraded.yaml
   subscription-modified:
     post:
       $ref: ./webhooks/subscription-modified.yaml
@@ -1081,6 +1107,15 @@ x-webhooks:
   subscription-trial-end-changed:
     post:
       $ref: ./webhooks/subscription-trial-end-changed.yaml
+  subscription-upgraded:
+    post:
+      $ref: ./webhooks/subscription-upgraded.yaml
+  subscription-paused:
+    post:
+      $ref: ./webhooks/subscription-paused.yaml
+  subscription-resumed:
+    post:
+      $ref: ./webhooks/subscription-resumed.yaml
   transaction-amount-discrepancy-found:
     post:
       $ref: ./webhooks/transaction-amount-discrepancy-found.yaml

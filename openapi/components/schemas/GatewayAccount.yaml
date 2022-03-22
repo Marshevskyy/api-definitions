@@ -7,6 +7,7 @@ discriminator:
   propertyName: gatewayName
   mapping:
     A1Gateway: ./GatewayAccountConfig/A1Gateway.yaml
+    ACI: ./GatewayAccountConfig/ACI.yaml
     Adyen: ./GatewayAccountConfig/Adyen.yaml
     Airpay: ./GatewayAccountConfig/Airpay.yaml
     AmazonPay: ./GatewayAccountConfig/AmazonPay.yaml
@@ -81,6 +82,8 @@ discriminator:
     Konnektive: ./GatewayAccountConfig/Konnektive.yaml
     loonie: ./GatewayAccountConfig/loonie.yaml
     LPG: ./GatewayAccountConfig/LPG.yaml
+    MaxiCash: ./GatewayAccountConfig/MaxiCash.yaml
+    MercadoPago: ./GatewayAccountConfig/MercadoPago.yaml
     MiFinity: ./GatewayAccountConfig/MiFinity.yaml
     Moneris: ./GatewayAccountConfig/Moneris.yaml
     MtaPay: ./GatewayAccountConfig/MtaPay.yaml
@@ -148,7 +151,6 @@ discriminator:
     TestProcessor: ./GatewayAccountConfig/TestProcessor.yaml
     ToditoCash: ./GatewayAccountConfig/ToditoCash.yaml
     Truevo: ./GatewayAccountConfig/Truevo.yaml
-    TrustPay: ./GatewayAccountConfig/TrustPay.yaml
     TrustsPay: ./GatewayAccountConfig/TrustsPay.yaml
     Trustly: ./GatewayAccountConfig/Trustly.yaml
     TWINT: ./GatewayAccountConfig/TWINT.yaml
@@ -158,6 +160,7 @@ discriminator:
     VCreditos: ./GatewayAccountConfig/VCreditos.yaml
     Wallet88: ./GatewayAccountConfig/Wallet88.yaml
     Walpay: ./GatewayAccountConfig/Walpay.yaml
+    WesternUnion: ./GatewayAccountConfig/WesternUnion.yaml
     Wirecard: ./GatewayAccountConfig/Wirecard.yaml
     WorldlineAtosFrankfurt: ./GatewayAccountConfig/WorldlineAtosFrankfurt.yaml
     Worldpay: ./GatewayAccountConfig/Worldpay.yaml
@@ -264,7 +267,7 @@ properties:
     type: boolean
     default: false
   digitalWallets:
-    $ref: ./PaymentCards/DigitalWallets.yaml
+    $ref: ./GatewayAccounts/DigitalWallets.yaml
   isDown:
     description: True if gateway is currently in downtime period.
     type: boolean
