@@ -4,7 +4,8 @@ allOf:
     - customerId
   - properties:
       customerId:
-        description: The сustomer's ID.
+        description: The customer ID.
+        x-basic: true
         allOf:
           - $ref: ../ResourceId.yaml
       transactions:
@@ -25,6 +26,12 @@ allOf:
               properties:
                 scheduleInstruction:
                   $ref: ../Scheduling/InvoiceRetryScheduleInstruction.yaml
+                amountAdjustmentInstruction:
+                  $ref: ../InvoiceRetry/InvoiceRetryAmountAdjustmentInstruction.yaml
+                tryBackupInstruments:
+                  description: Whether to use backup payment instruments on invoice payment retry or not.
+                  type: boolean
+                  default: false
               required:
                 - scheduleInstruction
           afterAttemptPolicies:
@@ -54,6 +61,19 @@ allOf:
           change takes precedence over the current representation.
         type: integer
         readOnly: true
+      type:
+        description: Invoice type.
+        type: string
+        enum:
+          - initial
+          - renewal
+          - interim
+          - cancellation
+          - one-time
+          - refund
+          - charge
+          - one-time-sale
+        readOnly: true
       dueReminderTime:
         description: Time past due reminder event will be triggered.
         nullable: true
@@ -61,17 +81,9 @@ allOf:
           - $ref: ../ServerTimestamp.yaml
       dueReminderNumber:
         description: Number of past due reminder events triggered.
+        nullable: true
         type: integer
         readOnly: true
-      paymentFormUrl:
-        description: |
-          The URL customer should follow to pay the invoice. You can replace this URL with your own. To reset it to
-          Rebilly one – set `null`.
-
-          This URL will be available only if `status` is `unpaid` or `past-due`.
-        type: string
-        format: url
-        nullable: true
       _links:
         type: array
         description: The links related to resource.
@@ -100,3 +112,4 @@ allOf:
             - $ref: ../Embeds/WebsiteEmbed.yaml
             - $ref: ../Embeds/OrganizationEmbed.yaml
             - $ref: ../Embeds/LeadSourceEmbed.yaml
+            - $ref: ../Embeds/ShippingRateEmbed.yaml

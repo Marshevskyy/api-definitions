@@ -1,17 +1,18 @@
-parameters:
-  - $ref: ../../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Storefront
   tags:
     - Account
   summary: Retrieve Account
   operationId: StorefrontGetAccount
+  x-sdk-operation-name: get
   security:
     - CustomerJWT: []
   description: |
     Retrieve account.
   responses:
     200:
-      description: Account was retrieved successfuly.
+      description: Account was retrieved successfully.
       content:
         application/json:
           schema:
@@ -21,10 +22,13 @@ get:
     403:
       $ref: ../../components/responses/Forbidden.yaml
 patch:
+  x-products:
+    - Storefront
   tags:
     - Account
   summary: Update Account
   operationId: StorefrontPatchAccount
+  x-sdk-operation-name: update
   security:
     - CustomerJWT: []
   description: |

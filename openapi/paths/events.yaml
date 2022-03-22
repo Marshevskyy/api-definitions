@@ -1,20 +1,17 @@
-parameters:
-  - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Risk Management
+    - Users
   tags:
     - Rules
   summary: Retrieve a list of existing events
   operationId: GetEventCollection
+  x-sdk-operation-name: getAll
   responses:
     '200':
       description: A list of System Events was retrieved successfully.
       headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
         Pagination-Limit:
@@ -31,7 +28,7 @@ get:
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/events/get.js

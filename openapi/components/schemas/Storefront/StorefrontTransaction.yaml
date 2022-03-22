@@ -5,3 +5,16 @@ allOf:
         description: The URL to redirect the end-customer when transaction `status` is `waiting-approval` or `offsite`.
         type: string
         format: uri
+      token:
+        description: The session's token used for authentication. It would allow to visit created order, invoice and transaction.
+        type: string
+        readOnly: true
+      _links:
+        type: array
+        description: The links related to resource.
+        readOnly: true
+        minItems: 1
+        items:
+          anyOf:
+            - $ref: ../Links/SelfLink.yaml
+            - $ref: ../Links/ApprovalUrlLink.yaml

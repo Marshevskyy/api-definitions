@@ -1,0 +1,86 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Full
+    - Billing
+    - Users
+  tags:
+    - Billing Portals
+  summary: Retrieve a billing portal
+  operationId: GetBillingPortal
+  x-sdk-operation-name: get
+  description: |
+    Retrieve a billing portal with specified identifier string.
+  responses:
+    '200':
+      description: Billing portal was retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/BillingPortal.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+put:
+  x-products:
+    - Full
+    - Billing
+    - Users
+  tags:
+    - Billing Portals
+  summary: Create or update a billing portal
+  operationId: PutBillingPortal
+  x-sdk-operation-name: update
+  description: |
+    Create or update a billing portal with predefined identifier string.
+  responses:
+    '200':
+      description: Billing portal was updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/BillingPortal.yaml
+    '201':
+      description: Billing portal was created.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/BillingPortal.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/BillingPortal.yaml
+delete:
+  x-products:
+    - Full
+    - Billing
+    - Users
+  tags:
+    - Billing Portals
+  summary: Delete a billing portal
+  operationId: DeleteBillingPortal
+  x-sdk-operation-name: delete
+  description: |
+    Delete a billing portal with predefined identifier string.
+  responses:
+    '204':
+      description: Billing portal was deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

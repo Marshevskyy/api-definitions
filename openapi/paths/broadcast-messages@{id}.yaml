@@ -1,23 +1,19 @@
 parameters:
-  - $ref: ../components/parameters/organizationId.yaml
   - $ref: ../components/parameters/resourceId.yaml
 get:
+  x-products:
+    - Full
+    - Users
   tags:
     - Broadcast Messages
   summary: Retrieve a broadcast message
   operationId: GetBroadcastMessage
+  x-sdk-operation-name: get
   description: |
     Retrieve a broadcast message.
   responses:
     '200':
       description: Broadcast message with specified identifier was retrieved successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -29,39 +25,33 @@ get:
     '404':
       $ref: ../components/responses/NotFound.yaml
 delete:
+  x-products:
+    - Full
+    - Users
   tags:
     - Broadcast Messages
   summary: Delete a broadcast message
   operationId: DeleteBroadcastMessage
+  x-sdk-operation-name: delete
   description: |
     Delete a broadcast message.
   responses:
     '204':
       description: Broadcast message was deleted.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
 patch:
+  x-products:
+    - Full
+    - Users
   tags:
     - Broadcast Messages
   summary: Update a broadcast message
   operationId: PatchBroadcastMessage
+  x-sdk-operation-name: update
   description: |
     Update a broadcast message.
   responses:
     '200':
       description: Broadcast message was updated.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:

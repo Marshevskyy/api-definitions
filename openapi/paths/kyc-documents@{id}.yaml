@@ -1,22 +1,19 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
-  - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Risk Management
+    - Core
   tags:
     - KYC Documents
   summary: Retrieve a KYC Document
   operationId: GetKycDocument
+  x-sdk-operation-name: get
   description: Retrieve a KYC document with specified identifier string.
   responses:
     '200':
       description: KYC document was retrieved successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -27,15 +24,20 @@ get:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/kyc-documents@{id}/get.js'
 put:
+  x-products:
+    - Full
+    - Risk Management
+    - Core
   tags:
     - KYC Documents
   summary: Create or update a KYC document with predefined ID
   operationId: PutKycDocument
+  x-sdk-operation-name: update
   description: Create or update a KYC document with predefined identifier string.
   requestBody:
     content:
@@ -47,26 +49,12 @@ put:
   responses:
     '200':
       description: KYC document was updated.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
             $ref: ../components/schemas/KycDocument/KycDocument.yaml
     '201':
       description: KYC document was created.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -79,7 +67,7 @@ put:
       $ref: ../components/responses/NotFound.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/kyc-documents@{id}/put.js'

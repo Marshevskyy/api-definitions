@@ -1,10 +1,14 @@
-parameters:
-  - $ref: ../components/parameters/organizationId.yaml
 post:
+  x-products:
+    - Full
+    - Payments
+    - Billing
+    - Core
   tags:
     - Transactions
   summary: Create a credit transaction
   operationId: PostPayout
+  x-sdk-operation-name: create
   description: |
     Create a transaction of type `credit`.
   requestBody:

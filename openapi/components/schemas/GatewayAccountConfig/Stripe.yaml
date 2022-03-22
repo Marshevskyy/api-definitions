@@ -5,6 +5,17 @@ allOf:
     required:
       - settings
     properties:
+      credentials:
+        type: object
+        description: Stripe Connect credentials object. The credentials object may be provided in order to control the Stripe Connect account under which the gateway account is connected.
+        properties:
+          stripeClientId:
+            type: string
+            description: The Client ID under which to connect the Stripe account.
+          stripeSecret:
+            type: string
+            description: The secret key of the Stripe Connect account under which to connect the Stripe account.
+            format: password
       settings:
         type: object
         description: Stripe settings object.
@@ -15,13 +26,16 @@ allOf:
             type: string
             description: The URL where the user will be redirected after authorizing the account on Stripe.
             format: url
-          usePaymentIntents:
+          disablePaymentIntents:
             type: boolean
-            description: If `true` the `PaymentIntents` API will be used instead of `Charges` API.
+            description: If `true` the `Charges` API will be used instead of `PaymentIntents` API.
             default: false
           enforceOffSession:
             type: boolean
             description: If `true`, `off_session` param will always be `true` in Stripe requests.
             default: false
+          copyCredentialsFrom:
+            type: string
+            description: The ID of an existing Stripe gateway account from which credentials will be copied in order to skip the onboarding process.
       threeDSecureServer:
         $ref: ../ThreeDSecureServers/Stripe3dsServers/Stripe3dsServers.yaml

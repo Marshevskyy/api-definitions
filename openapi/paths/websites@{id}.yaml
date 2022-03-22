@@ -1,34 +1,34 @@
 parameters:
-  - $ref: ../components/parameters/organizationId.yaml
   - $ref: ../components/parameters/resourceId.yaml
 get:
+  x-products:
+    - Full
+    - Users
   tags:
     - Websites
   summary: Retrieve a website
   operationId: GetWebsite
+  x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
   description: |
     Retrieve a website with specified identifier string.
   responses:
     '200':
       description: Website was retrieved successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Website.yaml
+            $ref: ../components/schemas/Websites/Website.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: '../code_samples/PHP/websites@{id}/get.php'
@@ -36,10 +36,14 @@ get:
       source:
         $ref: '../code_samples/JavaScript/websites@{id}/get.js'
 put:
+  x-products:
+    - Full
+    - Users
   tags:
     - Websites
   summary: Create or update a website with predefined ID
   operationId: PutWebsite
+  x-sdk-operation-name: update
   description: |
     Create or update a website with predefined identifier string.
   requestBody:
@@ -47,30 +51,16 @@ put:
   responses:
     '200':
       description: Website was updated.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Website.yaml
+            $ref: ../components/schemas/Websites/Website.yaml
     '201':
       description: Website was created.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Website.yaml
+            $ref: ../components/schemas/Websites/Website.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -78,12 +68,8 @@ put:
     '404':
       $ref: ../components/responses/NotFound.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
-  x-code-samples:
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: '../code_samples/PHP/websites@{id}/put.php'
@@ -91,22 +77,19 @@ put:
       source:
         $ref: '../code_samples/JavaScript/websites@{id}/put.js'
 delete:
+  x-products:
+    - Full
+    - Users
   tags:
     - Websites
   summary: Delete a website
   operationId: DeleteWebsite
+  x-sdk-operation-name: delete
   description: |
     Delete a website with predefined identifier string.
   responses:
     '204':
       description: Website was deleted.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -114,8 +97,8 @@ delete:
     '404':
       $ref: ../components/responses/NotFound.yaml
     '409':
-      description: Website has related resources and cannot be deleted.
-  x-code-samples:
+      $ref: ../components/responses/Conflict.yaml
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: '../code_samples/PHP/websites@{id}/delete.php'

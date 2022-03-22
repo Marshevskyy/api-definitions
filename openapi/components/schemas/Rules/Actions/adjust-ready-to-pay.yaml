@@ -11,7 +11,7 @@ allOf:
           the top of the list.
       paymentMethods:
         type: array
-        description: An ordered list of payment methods allowed. If empty – none are allowed.
+        description: An ordered list of payment methods allowed. If empty, then no payment methods are allowed.
         items:
           type: object
           required:
@@ -26,11 +26,10 @@ allOf:
                   enum:
                     - payment-card
                 feature:
-                  type: string
                   nullable: true
-                  enum:
-                    - Google Pay
-                    - Apple Pay
+                  oneOf:
+                    - $ref: ../../ReadyToPay/Features/ApplePayFeatureName.yaml
+                    - $ref: ../../ReadyToPay/Features/GooglePayFeatureName.yaml
             - type: object
               title: ACH
               properties:
@@ -39,15 +38,30 @@ allOf:
                   enum:
                     - ach
                 feature:
-                  type: string
                   nullable: true
+                  oneOf:
+                    - $ref: ../../ReadyToPay/Features/PlaidFeatureName.yaml
+            - type: object
+              title: PayPal
+              properties:
+                paymentMethod:
+                  type: string
                   enum:
-                    - Plaid
+                    - paypal
+                feature:
+                  nullable: true
+                  oneOf:
+                    - $ref: ../../ReadyToPay/Features/PayPalBillingAgreementFeatureName.yaml
             - type: object
               title: Generic
               properties:
                 paymentMethod:
-                  $ref: ../../PaymentMethods/TokenPaymentMethod.yaml
+                  description: The payment method.
+                  allOf:
+                    - $ref: ../../PaymentMethods/AlternativePaymentMethods.yaml
+                    - not:
+                        enum:
+                          - paypal
                 feature:
                   nullable: true
           properties:
@@ -57,4 +71,4 @@ allOf:
               description: |
                 The specific payment method feature like `Google Pay`, `Apple Pay` or `Plaid`.
 
-                If set to `null` – applies to the payment method itself.
+                If set to `null`, then there are no features. This applies to the payment method.

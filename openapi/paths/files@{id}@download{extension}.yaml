@@ -10,12 +10,16 @@ parameters:
         - .png
         - .jpg
         - .gif
-  - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Risk Management
+    - Core
   tags:
     - Files
   summary: Download image in specific format
   operationId: GetFileDownloadExtension
+  x-sdk-operation-name: downloadWithExtension
   description: |
     Download image in specific format. Images are converted server-side.
   responses:

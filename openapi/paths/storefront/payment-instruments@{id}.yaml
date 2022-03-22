@@ -1,11 +1,13 @@
 parameters:
-  - $ref: ../../components/parameters/organizationId.yaml
   - $ref: ../../components/parameters/resourceId.yaml
 get:
+  x-products:
+    - Storefront
   tags:
-    - Payment Instrument
+    - Payment Instruments
   summary: Retrieve a Payment Instrument
   operationId: StorefrontGetPaymentInstrument
+  x-sdk-operation-name: get
   security:
     - CustomerJWT: []
   description: |
@@ -34,10 +36,13 @@ get:
     404:
       $ref: ../../components/responses/NotFound.yaml
 patch:
+  x-products:
+    - Storefront
   tags:
-    - Payment Instrument
+    - Payment Instruments
   summary: Update a Payment Instrument's values
   operationId: StorefrontPatchPaymentInstrument
+  x-sdk-operation-name: update
   security:
     - CustomerJWT: []
   description: |

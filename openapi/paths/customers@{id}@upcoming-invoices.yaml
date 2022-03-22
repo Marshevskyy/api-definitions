@@ -1,11 +1,15 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
-  - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Invoices
   summary: Retrieve customer's upcoming invoices
   operationId: GetCustomerUpcomingInvoiceCollection
+  x-sdk-operation-name: getAllUpcomingInvoices
   description: >
     Retrieve a list of upcoming invoices from the subscriptions which belong to.
     the given customer.
@@ -17,13 +21,6 @@ get:
   responses:
     '200':
       description: Upcoming invoices are retrieved successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:

@@ -1,0 +1,27 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Full
+    - Users
+  tags: ["Balance transactions"]
+  summary: Retrieve a balance transaction
+  description: |
+    Retrieve a balance transaction with specified identifier.
+
+    This operation is experimental and not guaranteed to be backward compatible.
+  operationId: GetBalanceTransaction
+  x-sdk-operation-name: get
+  responses:
+    '200':
+      description: An entry was retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/BalanceTransactions/BalanceTransaction.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

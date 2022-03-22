@@ -1,0 +1,78 @@
+type: object
+required:
+  - documents
+properties:
+  id:
+    readOnly: true
+    allOf:
+      - $ref: ../ResourceId.yaml
+  documents:
+    description: Documents to be requested from customer.
+    type: array
+    items:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          description: Document type to be requested from customer.
+          allOf:
+            - $ref: ../KycDocument/KycDocumentTypes.yaml
+        subtypes:
+          description: Document subtype allowed for customer.
+          type: array
+          items:
+            $ref: ../KycDocument/KycDocumentSubtypes.yaml
+        maxAttempts:
+          description: The number of document upload attempts. `0` treated as unlimited.
+          type: integer
+          default: 3
+          minimum: 0
+          maximum: 100
+        faceProofRequired:
+          description: If `true` uploading matching face photo (selfie) is required.
+          type: boolean
+  status:
+    description: Status of the request.
+    type: string
+    readOnly: true
+    enum:
+      - abandoned
+      - expired
+      - pending
+      - fulfilled
+      - failed
+      - incomplete
+      - in-progress
+    x-enumDescriptions:
+      abandoned: Request expired and has at least one document uploaded
+      expired: Request expired without any document uploaded
+      pending: All requested documents are provided and have the status `accepted`, `pending` or `in-progress`
+      fulfilled: All requested documents are provided and `accepted`
+      failed: At least one requested document exhausted all attempts and does not have the status `accepted`, `pending` or `in-progress`
+      incomplete: At least one requested document has the `accepted` status, but not all of them
+      in-progress: No requested documents are `accepted` and not all uploaded documents have the status `pending` or `in-progress`
+  redirectUrl:
+    description: |
+      The URL to redirect the customer when an upload is completed.
+      When the customer is redirected, Rebilly will append an `info` query parameter which may have one of the following values (example: `https://example.com?info=success`):
+
+        - **back** - The customer clicked the `back to website` link;
+        - **token_expired** - The customer's token expired;
+        - **success** - The customer uploaded docs that were successfully analyzed;
+        - **manual** - The customer uploaded docs that will require manual review because the analyzer rejected them or couldn't process them;
+        - **partial** - The customer had success with some doc type but not with other (for example, successful proof of address but skipped proof of id).
+    type: string
+    format: uri
+  expirationTime:
+    description: Expiration date-time. Default value is one hour in the future.
+    type: string
+    format: date-time
+  createdTime:
+    description: Creation date-time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml
+  updatedTime:
+    description: Latest update date-time.
+    allOf:
+      - $ref: ../ServerTimestamp.yaml

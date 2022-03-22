@@ -1,25 +1,28 @@
-parameters:
-  - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Users
   tags:
     - Websites
   summary: Retrieve a list of websites
   operationId: GetWebsiteCollection
+  x-sdk-operation-name: getAll
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
   description: |
     Retrieve a list of websites.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
       description: A list of Websites was retrieved successfully.
       headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
         Pagination-Limit:
@@ -31,12 +34,12 @@ get:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/Website.yaml
+              $ref: ../components/schemas/Websites/Website.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: ../code_samples/PHP/websites/get.php
@@ -44,10 +47,14 @@ get:
       source:
         $ref: ../code_samples/JavaScript/websites/get.js
 post:
+  x-products:
+    - Full
+    - Users
   tags:
     - Websites
   summary: Create a website
   operationId: PostWebsite
+  x-sdk-operation-name: create
   description: |
     Create a website.
   requestBody:
@@ -55,28 +62,17 @@ post:
   responses:
     '201':
       description: Website was created.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Website.yaml
+            $ref: ../components/schemas/Websites/Website.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
-  x-code-samples:
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: ../code_samples/PHP/websites/post.php

@@ -1,0 +1,32 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Full
+    - Risk Management
+    - Core
+  tags:
+    - KYC Documents
+  summary: Update a KYC document's documentMatches
+  operationId: PostKycDocumentMatches
+  x-sdk-operation-name: matches
+  description: >
+    Updates a KYC document's documentMatches. Intended to be used for manual overrides.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          anyOf:
+            - $ref: ../components/schemas/KycDocument/IdentityMatches.yaml
+            - $ref: ../components/schemas/KycDocument/AddressMatches.yaml
+    description: Kyc document resource.
+    required: true
+  responses:
+    '204':
+      description: KYC document's documentMatches were updated.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

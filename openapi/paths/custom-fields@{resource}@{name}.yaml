@@ -8,24 +8,20 @@ parameters:
       type: string
       maxLength: 60
       pattern: '^[\w-]+$'
-  - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Core
   tags:
     - Custom Fields
   summary: Retrieve a Custom Field
   operationId: GetCustomField
+  x-sdk-operation-name: get
   description: |
     Retrieve a schema of the given Custom Field for the given resource type.
   responses:
     '200':
       description: A schema of the Custom Field was retrieved successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -36,7 +32,7 @@ get:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: '../code_samples/PHP/custom-fields@{resource}@{name}/get.php'
@@ -44,10 +40,14 @@ get:
       source:
         $ref: '../code_samples/JavaScript/custom-fields@{resource}@{name}/get.js'
 put:
+  x-products:
+    - Full
+    - Core
   tags:
     - Custom Fields
   summary: Create or alter a Custom Field
   operationId: PutCustomField
+  x-sdk-operation-name: create
   description: >
     Create or alter a schema of the given Custom Field for the given resource.
     type.
@@ -61,26 +61,12 @@ put:
   responses:
     '200':
       description: The Custom Field was updated.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
             $ref: ../components/schemas/CustomField.yaml
     '201':
       description: The Custom Fields was created.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -97,7 +83,7 @@ put:
             $ref: ../components/schemas/Error.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: '../code_samples/PHP/custom-fields@{resource}@{name}/put.php'

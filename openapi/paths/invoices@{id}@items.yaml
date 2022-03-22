@@ -1,26 +1,24 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
-  - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Invoices
   summary: Retrieve invoice items
   operationId: GetInvoiceItemCollection
+  x-sdk-operation-name: getAllInvoiceItems
   description: |
     Retrieve an invoice items with specified invoice identifier string.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
       description: Invoice items were retrieved successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -33,7 +31,7 @@ get:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: '../code_samples/PHP/invoices@{id}@items/get.php'
@@ -41,10 +39,15 @@ get:
       source:
         $ref: '../code_samples/JavaScript/invoices@{id}@items/get.js'
 post:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Invoices
   summary: Create an invoice item
   operationId: PostInvoiceItem
+  x-sdk-operation-name: createInvoiceItem
   description: |
     Create an invoice item.
   requestBody:
@@ -57,13 +60,6 @@ post:
   responses:
     '201':
       description: InvoiceItem was created.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -72,7 +68,7 @@ post:
       $ref: ../components/responses/Unauthorized.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: '../code_samples/PHP/invoices@{id}@items/post.php'

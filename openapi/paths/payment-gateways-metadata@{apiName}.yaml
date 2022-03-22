@@ -1,0 +1,25 @@
+parameters:
+  - name: apiName
+    in: path
+    description: The payment gateway metadata API name.
+    required: true
+    schema:
+      $ref: ../components/schemas/Metadata/PaymentGatewaName.yaml
+get:
+  x-products:
+    - Full
+    - Users
+  tags:
+    - Metadata
+  summary: Retrieve a specified payment gateway metadata
+  operationId: GetPaymentGatewayMetadata
+  x-sdk-operation-name: get
+  description: Retrieve a specified payment gateway metadata.
+  security: []
+  responses:
+    '200':
+      description: Payment gateway metadata was received.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Metadata/PaymentGatewayMetadata.yaml

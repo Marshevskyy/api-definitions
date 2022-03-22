@@ -1,23 +1,22 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
-  - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Risk Management
+    - Payments
+    - Billing
+    - Core
   tags:
     - Customers
   summary: Retrieve a customer's Lead Source
   operationId: GetCustomerLeadSource
+  x-sdk-operation-name: getLeadSource
   description: |
     Retrieve a Lead Source of given customer.
   responses:
     '200':
       description: Lead Source was retrieved successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -28,7 +27,7 @@ get:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: '../code_samples/PHP/customers@{id}@lead-source/get.php'
@@ -36,10 +35,17 @@ get:
       source:
         $ref: '../code_samples/JavaScript/customers@{id}@lead-source/get.js'
 put:
+  x-products:
+    - Full
+    - Risk Management
+    - Payments
+    - Billing
+    - Core
   tags:
     - Customers
   summary: Create a Lead Source for a customer
   operationId: PutCustomerLeadSource
+  x-sdk-operation-name: createLeadSource
   description: |
     Create a Lead Source for a customer.
   requestBody:
@@ -52,13 +58,6 @@ put:
   responses:
     '201':
       description: Lead Source was created.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -69,7 +68,7 @@ put:
       $ref: ../components/responses/Forbidden.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: '../code_samples/PHP/customers@{id}@lead-source/put.php'
@@ -77,22 +76,22 @@ put:
       source:
         $ref: '../code_samples/JavaScript/customers@{id}@lead-source/put.js'
 delete:
+  x-products:
+    - Full
+    - Risk Management
+    - Payments
+    - Billing
+    - Core
   tags:
     - Customers
   summary: Delete a Lead Source for a customer
   operationId: DeleteCustomerLeadSource
+  x-sdk-operation-name: deleteLeadSource
   description: |
     Delete a Lead Source that belongs to a certain customer.
   responses:
     '204':
       description: Lead Source was deleted.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
@@ -101,7 +100,7 @@ delete:
       $ref: ../components/responses/NotFound.yaml
     '409':
       $ref: ../components/responses/Conflict.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: '../code_samples/PHP/customers@{id}@lead-source/delete.php'

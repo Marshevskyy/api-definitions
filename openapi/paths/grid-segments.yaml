@@ -1,25 +1,24 @@
-parameters:
-  - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Users
   tags:
     - Segments
   summary: Retrieve a user's Segments
   operationId: GetGridSegmentCollection
+  x-sdk-operation-name: getAll
   description: |
     Retrieve a user's UI Segments.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
     - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
       description: Segments were retrieved successfully.
       headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
         Pagination-Limit:
@@ -35,23 +34,20 @@ get:
     '403':
       $ref: ../components/responses/Forbidden.yaml
 post:
+  x-products:
+    - Full
+    - Users
   tags:
     - Segments
   summary: Create a new UI Segment
   operationId: PostGridSegment
+  x-sdk-operation-name: create
   description: |
     Create a new Segment for oneself or to share with others within the
     organization.
   responses:
     '201':
       description: Segment was created successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:

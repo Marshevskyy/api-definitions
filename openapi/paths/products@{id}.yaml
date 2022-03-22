@@ -1,23 +1,24 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
-  - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Products
   summary: Retrieve a product
   operationId: GetProduct
+  x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
   description: |
     Retrieve a product with specified identifier string.
   responses:
     '200':
       description: Product was retrieved successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -28,42 +29,33 @@ get:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/products@{id}/get.js'
 put:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Products
-  summary: Create a product with predefined ID
+  summary: Upsert a product with predefined ID
   operationId: PutProduct
+  x-sdk-operation-name: update
   description: |
-    Create a product with predefined identifier string.
+    Create or update a product with predefined identifier string.
   requestBody:
     $ref: ../components/requestBodies/Product.yaml
   responses:
     '200':
       description: Product was updated.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Product.yaml
     '201':
       description: Product was created.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -74,34 +66,32 @@ put:
       $ref: ../components/responses/Forbidden.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/products@{id}/put.js'
 delete:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Products
   summary: Delete a product
   operationId: DeleteProduct
+  x-sdk-operation-name: delete
   description: |
     Delete a product with predefined identifier string.
   responses:
     '204':
       description: Product was deleted.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/products@{id}/delete.js'

@@ -10,9 +10,11 @@ enum:
   - Airpay
   - Alfa-click
   - Alipay
-  - APAR
+  - AmazonPay
   - Apple Pay
   - AstroPay Card
+  - AstroPay-GO
+  - BankReferenced
   - bank-transfer
   - bank-transfer-2
   - bank-transfer-3
@@ -22,9 +24,11 @@ enum:
   - bank-transfer-7
   - bank-transfer-8
   - bank-transfer-9
+  - Baloto
   - Beeline
   - Belfius-direct-net
   - bitcoin
+  - Blik
   - Boleto
   - Boleto-2
   - Boleto-3
@@ -38,7 +42,10 @@ enum:
   - Conekta-spei
   - cryptocurrency
   - Cupon-de-pagos
+  - CyberSource
+  - Dimoco-pay-smart
   - domestic-cards
+  - Efecty
   - echeck
   - ecoPayz
   - ecoVoucher
@@ -46,6 +53,7 @@ enum:
   - ePay.bg
   - Ethereum
   - e-wallet
+  - ezyEFT
   - eZeeWallet
   - Flexepin
   - Giropay
@@ -63,16 +71,24 @@ enum:
   - Interac-express-connect
   - Interac
   - invoice
+  - iWallet
   - Jeton
   - jpay
   - Khelocard
   - Klarna
+  - KNOT
   - Litecoin
+  - loonie
   - LPG-online
   - LPG-payment-card
+  - Matrix
+  - MaxiCash
   - Megafon
+  - MiFinity-eWallet
   - miscellaneous
-  - Mistercash
+  - Multibanco
+  - Bancontact
+  - Bancontact-mobile
   - MTS
   - MuchBetter
   - MyFatoorah
@@ -85,24 +101,35 @@ enum:
   - Onlineueberweisen
   - oriental-wallet
   - OXXO
+  - P24
+  - PagoEffectivo
   - Pagsmile-lottery
   - Pagsmile-deposit-express
   - PayCash
   - Payeer
+  - PaymentAsia-crypto
   - Paysafecard
+  - PayTabs
   - Pay4Fun
+  - Paynote
   - Paymero
   - Paymero-QR
+  - PayU
   - PayULatam
   - Perfect-money
   - Piastrix
   - PIX
   - PinPay
   - phone
+  - PhonePe
   - POLi
+  - PostFinance-card
+  - PostFinance-e-finance
   - Przelewy24
   - QIWI
+  - QPay
   - QQPay
+  - rapyd-checkout
   - Resurs
   - SEPA
   - Siirto
@@ -113,6 +140,7 @@ enum:
   - SparkPay
   - swift-dbt
   - Tele2
+  - Telr
   - Terminaly-RF
   - Tether
   - ToditoCash-card
@@ -120,7 +148,10 @@ enum:
   - TWINT
   - UniCrypt
   - UPayCard
+  - UPI
+  - USD-coin
   - VCreditos
+  - VenusPoint
   - voucher
   - voucher-2
   - voucher-3
@@ -130,6 +161,8 @@ enum:
   - Webpay-2
   - Webpay Card
   - WeChat Pay
+  - XPay-P2P
+  - XPay-QR
   - Yandex-money
   - Zotapay
   - Zimpler

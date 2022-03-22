@@ -1,9 +1,20 @@
 servers:
-  - url: 'https://api.rebilly.com/experimental'
-  - url: 'https://api-sandbox.rebilly.com/experimental'
-parameters:
-  - $ref: ../components/parameters/organizationId.yaml
+  - url: 'https://api-sandbox.rebilly.com/experimental/organizations/{organizationId}'
+    description: Sandbox server
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+  - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
+    description: Live server
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
 post:
+  x-products:
+    - Full
+    - Reports
   tags:
     - Data Exports
   summary: Request a data export of selected resource
@@ -15,13 +26,6 @@ post:
   responses:
     '201':
       description: Data export request received.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -31,16 +35,15 @@ post:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
-  x-code-samples:
+      $ref: ../components/responses/ValidationError.yaml
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/data-exports/post.js
 get:
+  x-products:
+    - Full
+    - Reports
   tags:
     - Data Exports
   summary: Retrieve a list of data export requests
@@ -51,12 +54,6 @@ get:
     '200':
       description: A list of data export requests was retrieved successfully.
       headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
         Pagination-Limit:
@@ -75,7 +72,7 @@ get:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/data-exports/get.js

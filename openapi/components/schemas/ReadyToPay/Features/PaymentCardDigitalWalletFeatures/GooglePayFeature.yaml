@@ -1,0 +1,15 @@
+type: object
+title: Google Pay Digital Wallet
+properties:
+  name:
+    $ref: ../GooglePayFeatureName.yaml
+  merchantName:
+    description: The merchant name in Google Pay.
+    type: string
+    example: "Test Merchant"
+  merchantOrigin:
+    description: The merchant origin in Google Pay. The fully qualified domain name.
+    type: string
+    example: "www.example.com"
+  country:
+    $ref: ../../../DigitalWalletCountry.yaml

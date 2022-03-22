@@ -1,11 +1,14 @@
 parameters:
   - $ref: ../components/parameters/tag.yaml
-  - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Core
   tags:
     - Tags
   summary: Retrieve a tag
   operationId: GetTag
+  x-sdk-operation-name: get
   description: |
     Retrieve a tag.
   responses:
@@ -22,14 +25,18 @@ get:
     '404':
       $ref: ../components/responses/NotFound.yaml
 patch:
+  x-products:
+    - Full
+    - Core
   tags:
     - Tags
   summary: Update a tag
   operationId: PatchTag
+  x-sdk-operation-name: update
   description: |
     Update a tag.
   requestBody:
-    $ref: ../components/requestBodies/Tag.yaml
+    $ref: ../components/requestBodies/UpdateTag.yaml
   responses:
     '200':
       description: Tag was updated.
@@ -48,10 +55,14 @@ patch:
     '422':
       $ref: ../components/responses/ValidationError.yaml
 delete:
+  x-products:
+    - Full
+    - Core
   tags:
     - Tags
   summary: Delete a tag
   operationId: DeleteTag
+  x-sdk-operation-name: delete
   description: |
     Delete a tag.
     It's an asynchronous operation.

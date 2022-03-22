@@ -1,11 +1,15 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
-  - $ref: ../components/parameters/organizationId.yaml
 post:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Coupons
   summary: Cancel a coupon redemption
   operationId: PostCouponRedemptionCancellation
+  x-sdk-operation-name: cancelRedemption
   responses:
     '201':
       description: Cancel a coupon redemption.
@@ -15,7 +19,7 @@ post:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: '../code_samples/PHP/coupons-redemptions@{id}@cancel/post.php'

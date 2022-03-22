@@ -1,24 +1,23 @@
-parameters:
-  - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Orders
   summary: Retrieve a list of cancellations
   operationId: GetSubscriptionCancellationCollection
+  x-sdk-operation-name: getAll
   description: Retrieve a list of cancellations for all subscriptions.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
   responses:
     '200':
       description: A list of cancellations was retrieved successfully.
       headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
         Pagination-Limit:
@@ -36,23 +35,21 @@ get:
     '403':
       $ref: ../components/responses/Forbidden.yaml
 post:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Orders
   summary: Cancel an order
   operationId: PostSubscriptionCancellation
+  x-sdk-operation-name: create
   description: Cancel an order or preview the cancellation parameters before that.
   requestBody:
     $ref: ../components/requestBodies/SubscriptionCancellation.yaml
   responses:
     '201':
       description: Cancellation was created, the order is or will be deactivated.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -63,7 +60,7 @@ post:
       $ref: ../components/responses/Forbidden.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: ../code_samples/PHP/subscription-cancellations/post.php

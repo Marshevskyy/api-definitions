@@ -5,12 +5,16 @@ parameters:
     required: true
     schema:
       type: string
-  - $ref: ../components/parameters/organizationId.yaml
 post:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Customer Authentication
   summary: Exchange
   operationId: PostAuthenticationTokenExchange
+  x-sdk-operation-name: exchangeToken
   description: >
     Exchange Authentication Token for JWT.
 
@@ -30,13 +34,6 @@ post:
   responses:
     '201':
       description: Authentication Token exchanged for JWT.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:

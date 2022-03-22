@@ -1,0 +1,34 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Full
+    - Billing
+    - Core
+  tags:
+    - Orders
+  summary: Change an order's items
+  operationId: PostSubscriptionItemsChange
+  x-sdk-operation-name: changeItems
+  description: >
+    Change an order's items or quantities and designate when and if there should be pro-rata credits given.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/SubscriptionChange.yaml
+    description: Change items request.
+    required: true
+  responses:
+    '201':
+      description: Order was changed.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Subscription.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

@@ -1,12 +1,16 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
-  - $ref: ../components/parameters/organizationId.yaml
   - $ref: ../components/parameters/imageSize.yaml
 get:
+  x-products:
+    - Full
+    - Risk Management
+    - Core
   tags:
     - Files
   summary: Download a file
   operationId: GetFileDownload
+  x-sdk-operation-name: download
   description: |
     Download a file.
   responses:
@@ -34,7 +38,7 @@ get:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/files@{id}@download/get.js'

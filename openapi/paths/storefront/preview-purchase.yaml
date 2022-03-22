@@ -1,14 +1,17 @@
-parameters:
-  - $ref: ../../components/parameters/organizationId.yaml
 post:
+  x-products:
+    - Storefront
   tags:
-    - Purchase
+    - Purchases
   summary: Preview a purchase
   operationId: StorefrontPostPreviewPurchase
+  x-sdk-operation-name: preview
   description: |
     Purchase can be accomplished both with and without Authentication.
     Purchase via pre-created Payment Instrument is only available with Authentication.
     Use purchase preview before making an actual purchase.
+
+    **Warning:** The shipping part of this API will change to support multiple shipping methods.
   security:
     - CustomerJWT: []
     - PublishableApiKey: []
@@ -16,14 +19,14 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../../components/schemas/Storefront/PreviewPurchase.yaml
+          $ref: ../../components/schemas/Storefront/StorefrontOrderPreview.yaml
   responses:
     200:
       description: Purchase preview was retrieved.
       content:
         application/json:
           schema:
-            $ref: ../../components/schemas/Storefront/PreviewPurchase.yaml
+            $ref: ../../components/schemas/Storefront/StorefrontOrderPreview.yaml
     401:
       $ref: ../../components/responses/Unauthorized.yaml
     403:

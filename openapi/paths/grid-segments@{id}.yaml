@@ -1,23 +1,20 @@
 parameters:
-  - $ref: ../components/parameters/organizationId.yaml
   - $ref: ../components/parameters/resourceId.yaml
 get:
+  x-products:
+    - Full
+    - Users
   tags:
     - Segments
   summary: Retrieve a specific Segment
   operationId: GetGridSegment
+  x-sdk-operation-name: get
   description: |
     Retrieve a specific UI Segment.
   responses:
     '200':
       description: Segment was retrieved successfully.
       headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
         Pagination-Limit:
@@ -33,33 +30,25 @@ get:
     '404':
       $ref: ../components/responses/NotFound.yaml
 put:
+  x-products:
+    - Full
+    - Users
   tags:
     - Segments
   summary: Update a Segment
   operationId: PutGridSegment
+  x-sdk-operation-name: update
   description: |
     Update a Segment.
   responses:
     '200':
       description: Segment was updated successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Segments/Segment.yaml
     '403':
-      description: |
-        This will be sent if the user is not the owner.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Error.yaml
+      $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
     '422':
@@ -70,29 +59,21 @@ put:
         schema:
           $ref: ../components/schemas/Segments/Segment.yaml
 delete:
+  x-products:
+    - Full
+    - Users
   tags:
     - Segments
   summary: Delete a Segment
   operationId: DeleteGridSegment
+  x-sdk-operation-name: delete
   description: >
     Delete a Segment. This will also remove all shares. Only the owner may.
     perform this.
   responses:
     '204':
       description: Segment was deleted successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
     '403':
-      description: |
-        This will be sent if the user is not the owner.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Error.yaml
+      $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml

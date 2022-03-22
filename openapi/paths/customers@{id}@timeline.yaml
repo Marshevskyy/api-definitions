@@ -1,27 +1,26 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
-  - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Core
   tags:
     - Customers Timeline
   summary: Retrieve a list of customer timeline messages
   operationId: GetCustomerTimelineCollection
+  x-sdk-operation-name: getAllTimelineMessages
   description: |
     Retrieve a list of customer timeline messages.
   parameters:
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
     - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
       description: A list of customer timeline messages was retrieved successfully.
       headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
         Pagination-Limit:
@@ -38,15 +37,19 @@ get:
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/customers@{id}@timeline/get.js'
 post:
+  x-products:
+    - Full
+    - Core
   tags:
     - Customers Timeline
   summary: Create a customer Timeline comment or custom defined event
   operationId: PostCustomerTimeline
+  x-sdk-operation-name: createTimelineComment
   description: |
     Create a customer Timeline comment or custom defined event.
   requestBody:
@@ -59,13 +62,6 @@ post:
   responses:
     '201':
       description: Customer Timeline comment or custom defined event was created.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -76,7 +72,7 @@ post:
       $ref: ../components/responses/Forbidden.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/customers@{id}@timeline/post.js'

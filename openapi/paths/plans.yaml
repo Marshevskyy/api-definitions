@@ -1,25 +1,29 @@
-parameters:
-  - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Plans
   summary: Retrieve a list of plans
   operationId: GetPlanCollection
+  x-sdk-operation-name: getAll
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
   description: |
     Retrieve a list of plans.
   parameters:
+    - $ref: ../components/parameters/collectionFilter.yaml
+    - $ref: ../components/parameters/collectionSort.yaml
     - $ref: ../components/parameters/collectionLimit.yaml
     - $ref: ../components/parameters/collectionOffset.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
       description: A list of Plans was retrieved successfully.
       headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
         Pagination-Limit:
@@ -36,7 +40,7 @@ get:
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: ../code_samples/PHP/plans/get.php
@@ -44,10 +48,15 @@ get:
       source:
         $ref: ../code_samples/JavaScript/plans/get.js
 post:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Plans
   summary: Create a plan
   operationId: PostPlan
+  x-sdk-operation-name: create
   description: |
     Create a plan.
   requestBody:
@@ -65,7 +74,7 @@ post:
       $ref: ../components/responses/Forbidden.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: ../code_samples/PHP/plans/post.php

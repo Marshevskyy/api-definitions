@@ -1,11 +1,13 @@
 parameters:
-  - $ref: ../../components/parameters/organizationId.yaml
   - $ref: ../../components/parameters/resourceId.yaml
 get:
+  x-products:
+    - Storefront
   tags:
-    - KYC Document
+    - KYC Documents
   summary: Retrieve a KYC Document
   operationId: StorefrontGetKycDocument
+  x-sdk-operation-name: get
   security:
     - CustomerJWT: []
   description: |
@@ -16,7 +18,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../../components/schemas/Common/CommonKycDocument.yaml
+            $ref: ../../components/schemas/Storefront/StorefrontKycDocument.yaml
     401:
       $ref: ../../components/responses/Unauthorized.yaml
     403:
@@ -24,10 +26,13 @@ get:
     404:
       $ref: ../../components/responses/NotFound.yaml
 patch:
+  x-products:
+    - Storefront
   tags:
-    - KYC Document
+    - KYC Documents
   summary: Update a KYC document
   operationId: StorefrontPatchKycDocument
+  x-sdk-operation-name: update
   security:
     - CustomerJWT: []
   description: |
@@ -36,7 +41,7 @@ patch:
     content:
       application/json:
         schema:
-          $ref: ../../components/schemas/Common/CommonKycDocument.yaml
+          $ref: ../../components/schemas/Storefront/StorefrontKycDocument.yaml
     description: KYC document resource.
     required: true
   responses:
@@ -45,7 +50,7 @@ patch:
       content:
         application/json:
           schema:
-            $ref: ../../components/schemas/Common/CommonKycDocument.yaml
+            $ref: ../../components/schemas/Storefront/StorefrontKycDocument.yaml
     401:
       $ref: ../../components/responses/Unauthorized.yaml
     403:

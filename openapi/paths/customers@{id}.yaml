@@ -1,23 +1,29 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
-  - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Risk Management
+    - Payments
+    - Billing
+    - Core
   tags:
     - Customers
   summary: Retrieve a customer
   operationId: GetCustomer
+  x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
   description: |
     Retrieve a customer with specified identifier string.
+  parameters:
+    - $ref: ../components/parameters/collectionExpand.yaml
+    - $ref: ../components/parameters/collectionFields.yaml
   responses:
     '200':
       description: Customer was retrieved successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -28,7 +34,7 @@ get:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: '../code_samples/PHP/customers@{id}/get.php'
@@ -36,10 +42,17 @@ get:
       source:
         $ref: '../code_samples/JavaScript/customers@{id}/get.js'
 put:
+  x-products:
+    - Full
+    - Risk Management
+    - Payments
+    - Billing
+    - Core
   tags:
     - Customers
   summary: Upsert a customer with predefined ID
   operationId: PutCustomer
+  x-sdk-operation-name: update
   description: >
     Create or update (upsert) a customer with predefined identifier string.
 
@@ -62,7 +75,7 @@ put:
       $ref: ../components/responses/Conflict.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: '../code_samples/PHP/customers@{id}/put.php'
@@ -70,6 +83,12 @@ put:
       source:
         $ref: '../code_samples/JavaScript/customers@{id}/put.js'
 delete:
+  x-products:
+    - Full
+    - Risk Management
+    - Payments
+    - Billing
+    - Core
   parameters:
     - in: query
       name: targetCustomerId
@@ -83,19 +102,13 @@ delete:
     - Customers
   summary: Merge and delete a customer
   operationId: DeleteCustomer
+  x-sdk-operation-name: merge
   description: >-
     Merge one duplicate customer to another target customer and delete the.
     former.
   responses:
     '204':
       description: Customer has been merged and removed.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

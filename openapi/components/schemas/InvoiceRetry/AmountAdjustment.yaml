@@ -1,0 +1,14 @@
+type: object
+discriminator:
+  propertyName: method
+  mapping:
+    none: ./AmountAdjustmentInstructions/none.yaml
+    partial: ./AmountAdjustmentInstructions/partial.yaml
+properties:
+  method:
+    type: string
+    enum:
+      - none
+      - partial
+required:
+  - method

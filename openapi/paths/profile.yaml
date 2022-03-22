@@ -1,20 +1,17 @@
 get:
+  x-products:
+    - Full
+    - Users
   tags:
     - Profile
   summary: Retrieve user's profile
   operationId: GetProfile
+  x-sdk-operation-name: get
   description: |
     Retrieve user's profile.
   responses:
     '200':
       description: Profile was retrieved successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -25,15 +22,19 @@ get:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/profile/get.js
 put:
+  x-products:
+    - Full
+    - Users
   tags:
     - Profile
   summary: Update user's profile
   operationId: PutProfile
+  x-sdk-operation-name: update
   description: |
     Update user's profile.
   requestBody:
@@ -46,13 +47,6 @@ put:
   responses:
     '200':
       description: Profile was updated.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -65,7 +59,7 @@ put:
       $ref: ../components/responses/NotFound.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/profile/put.js

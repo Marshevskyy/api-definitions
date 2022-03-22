@@ -1,9 +1,20 @@
 servers:
-  - url: 'https://api.rebilly.com/experimental'
-  - url: 'https://api-sandbox.rebilly.com/experimental'
-parameters:
-  - $ref: ../components/parameters/organizationId.yaml
+  - url: 'https://api-sandbox.rebilly.com/experimental/organizations/{organizationId}'
+    description: Sandbox server
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+  - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
+    description: Live server
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
 get:
+  x-products:
+    - Full
+    - Reports
   tags:
     - Reports
   summary: Retrieve a cumulative subscriptions report
@@ -37,13 +48,6 @@ get:
   responses:
     '200':
       description: Report was retrieved successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -52,7 +56,7 @@ get:
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/reports@cumulative-subscriptions/get.js

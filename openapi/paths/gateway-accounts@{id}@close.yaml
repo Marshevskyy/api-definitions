@@ -1,11 +1,14 @@
 parameters:
-  - $ref: ../components/parameters/organizationId.yaml
   - $ref: ../components/parameters/resourceId.yaml
 post:
+  x-products:
+    - Full
+    - Users
   tags:
     - Gateway Accounts
   summary: Close a Gateway Account
   operationId: PostGatewayAccountClosure
+  x-sdk-operation-name: close
   description: >
     Close a gateway account with specified identifier string.
 
@@ -16,13 +19,6 @@ post:
   responses:
     '201':
       description: Closed successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -33,7 +29,7 @@ post:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/gateway-accounts@{id}@close/post.js'

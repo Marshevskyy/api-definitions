@@ -1,13 +1,17 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
-  - $ref: ../components/parameters/organizationId.yaml
 post:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Coupons
   summary: Set a coupon's expiration time
   operationId: PostCouponExpiration
+  x-sdk-operation-name: setExpiration
   description: |
-    Set a coupon's expiry time with the specified coupon ID.
+    Set a coupon's expiration time with the specified coupon ID.
     The expiredTime of a coupon must be greater than its issuedTime.
     This cannot be performed on expired coupons.
   requestBody:
@@ -19,13 +23,6 @@ post:
   responses:
     '201':
       description: Coupon expiration was successfully set.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -46,7 +43,7 @@ post:
             $ref: ../components/schemas/Error.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/coupons@{id}@expiration/post.js'

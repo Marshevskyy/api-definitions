@@ -2,13 +2,15 @@ description: The acquirer name.
 type: string
 enum:
   - Adyen
+  - ACI
   - Alipay
   - AIB
   - Airpay
-  - APAR
+  - AmazonPay
   - ApcoPay
   - AsiaPaymentGateway
   - AstroPay Card
+  - Awepay
   - Ipay Options
   - B+S
   - Bambora
@@ -26,18 +28,21 @@ enum:
   - Catalunya Caixa
   - CCAvenue
   - Chase
+  - CheckoutCom
   - ChinaUnionPay
   - CIM
   - Circle
   - Citadel
   - Clearhaus
   - CODVoucher
+  - CoinGate
   - CoinPayments
   - Conekta
   - Coppr
   - Credorax
   - Cryptonator
   - CyberSource
+  - Dimoco
   - dLocal
   - Dragonphoenix
   - EBANX
@@ -48,6 +53,7 @@ enum:
   - EPG
   - Euteller
   - eZeeWallet
+  - ezyEFT
   - Fifth Third Bank
   - Finrax
   - First Data Buypass
@@ -75,10 +81,14 @@ enum:
   - Jeton
   - Khelocard
   - Konnektive
+  - loonie
   - LPG
   - Masapay
+  - MaxiCash
+  - MercadoPago
   - Merrick
   - Mission Valley Bank
+  - MiFinity
   - Moneris
   - MuchBetter
   - MyFatoorah
@@ -89,8 +99,10 @@ enum:
   - NinjaWallet
   - NMI
   - NuaPay
+  - Nuvei
   - OchaPay
   - Onlineueberweisen
+  - OnRamp
   - Other
   - Panamerican
   - Panda Bank
@@ -99,35 +111,46 @@ enum:
   - ParamountInterac
   - Pay4fun
   - PayCash
+  - PayClub
+  - PaymentAsia
   - PaymenTechnologies
   - PaymentsOS
   - Paymero
   - Paynetics
   - PayPal
   - Payr
+  - PayTabs
   - PayULatam
   - Payvision
   - Piastrix
   - Peoples Trust Company
+  - PostFinance
+  - PPRO
   - Privatbank
   - Prosa
   - QQPay
+  - Rapyd
   - RBC
   - RBS WorldPay
   - RealTime
   - Rotessa
+  - Safecharge
   - SaltarPay
   - SecureTrading
+  - SecurionPay
   - Skrill
   - SmartInvoice
   - SMSVoucher
   - Sofort
   - SparkPay
   - State Bank of Mauritius
+  - STPMexico
   - Stripe
   - TBI
+  - Telr
   - TestProcessor
   - ToditoCash
+  - Truevo
   - Trustly
   - TrustPay
   - TrustsPay
@@ -143,5 +166,6 @@ enum:
   - Wing Hang Bank
   - Wirecard
   - WorldPay
+  - XPay
   - Zimpler
   - Zotapay

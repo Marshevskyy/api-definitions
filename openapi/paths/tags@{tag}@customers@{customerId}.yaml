@@ -1,12 +1,15 @@
 parameters:
   - $ref: ../components/parameters/tag.yaml
   - $ref: ../components/parameters/customerId.yaml
-  - $ref: ../components/parameters/organizationId.yaml
 post:
+  x-products:
+    - Full
+    - Core
   tags:
     - Tags
   summary: Tag a customer
   operationId: PostTagCustomer
+  x-sdk-operation-name: tagCustomer
   description: |
     Tag a customer.
   responses:
@@ -19,10 +22,14 @@ post:
     '404':
       $ref: ../components/responses/NotFound.yaml
 delete:
+  x-products:
+    - Full
+    - Core
   tags:
     - Tags
   summary: Untag a customer
   operationId: DeleteTagCustomer
+  x-sdk-operation-name: untagCustomer
   description: |
     Untag a customer.
   responses:

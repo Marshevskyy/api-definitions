@@ -1,0 +1,62 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+get:
+  x-products:
+    - Full
+    - Users
+  tags:
+    - Gateway Accounts
+  summary: Retrieve financial settings
+  operationId: GetGatewayAccountFinancialSettings
+  x-sdk-operation-name: getFinancialSettings
+  description: >
+    Read financial settings of a gateway account.
+
+    This operation is experimental and not guaranteed to be backward compatible.
+  responses:
+    '200':
+      description: The financial settings were retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GatewayAccounts/FinancialSettings.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+
+put:
+  x-products:
+    - Full
+    - Users
+  tags:
+    - Gateway Accounts
+  summary: Set financial settings
+  operationId: PutGatewayAccountFinancialSettings
+  x-sdk-operation-name: setFinancialSettings
+  description: |
+    Set financial settings of a gateway account.
+
+    This operation is experimental and not guaranteed to be backward compatible.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/GatewayAccounts/FinancialSettings.yaml
+  responses:
+    '200':
+      description: Gateway account financial settings were updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GatewayAccounts/FinancialSettings.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml

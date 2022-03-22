@@ -1,10 +1,13 @@
-parameters:
-  - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Risk Management
+    - Users
   tags:
     - Lists
   summary: Retrieve a collection of Lists (latest version of each List)
   operationId: GetListCollection
+  x-sdk-operation-name: getAll
   description: |
     Retrieve a collection of Lists.
   parameters:
@@ -12,16 +15,12 @@ get:
     - $ref: ../components/parameters/collectionOffset.yaml
     - $ref: ../components/parameters/collectionFilter.yaml
     - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionFields.yaml
+    - $ref: ../components/parameters/collectionQuery.yaml
   responses:
     '200':
       description: A collection of Lists was retrieved successfully.
       headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
         Pagination-Limit:
@@ -38,27 +37,25 @@ get:
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/lists/get.js
 post:
+  x-products:
+    - Full
+    - Risk Management
+    - Users
   tags:
     - Lists
   summary: Create a List
   operationId: PostList
+  x-sdk-operation-name: create
   description: |
     Create a List.
   responses:
     '201':
       description: List was created.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -68,14 +65,10 @@ post:
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   requestBody:
     $ref: ../components/requestBodies/List.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/lists/post.js

@@ -1,0 +1,55 @@
+parameters:
+  - $ref: ../components/parameters/systemEventType.yaml
+  - name: messageId
+    in: path
+    description: The Rules Engine Timeline message ID.
+    required: true
+    schema:
+      type: string
+get:
+  x-products:
+    - Full
+    - Users
+  tags:
+    - Rules Timeline
+  summary: Retrieve Rules Engine Timeline message
+  operationId: GetRulesEngineTimeline
+  x-sdk-operation-name: getTimelineMessage
+  description: |
+    Retrieve a Rules Engine timeline message with specified identifier string.
+  responses:
+    '200':
+      description: Rules Engine message was retrieved successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Timelines/RulesEngineTimeline.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+delete:
+  x-products:
+    - Full
+    - Users
+  tags:
+    - Rules Timeline
+  summary: Delete Rules Engine Timeline message
+  operationId: DeleteRulesEngineTimeline
+  x-sdk-operation-name: deleteTimelineMessage
+  description: |
+    Delete Rules Engine Timeline message with predefined identifier string.
+  responses:
+    '204':
+      description: Rules Engine Timeline message was deleted.
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+

@@ -1,11 +1,14 @@
 parameters:
-  - $ref: ../components/parameters/organizationId.yaml
   - $ref: ../components/parameters/resourceId.yaml
 post:
+  x-products:
+    - Full
+    - Users
   tags:
     - Gateway Accounts
   summary: Enable a Gateway Account
   operationId: PostGatewayAccountEnablement
+  x-sdk-operation-name: enable
   description: >
     Enable a gateway account with specified identifier string.
 
@@ -14,13 +17,6 @@ post:
   responses:
     '201':
       description: Enabled successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -33,7 +29,7 @@ post:
       $ref: ../components/responses/NotFound.yaml
     '409':
       description: Gateway account is pending activation and cannot be enabled.
-  x-code-samples:
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/gateway-accounts@{id}@enable/post.js'

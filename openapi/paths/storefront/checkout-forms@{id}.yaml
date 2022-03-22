@@ -1,11 +1,13 @@
 parameters:
-  - $ref: ../../components/parameters/organizationId.yaml
   - $ref: ../../components/parameters/resourceId.yaml
 get:
+  x-products:
+    - Storefront
   tags:
     - Checkout Forms
   summary: Retrieve a checkout form
   operationId: StorefrontGetCheckoutForm
+  x-sdk-operation-name: get
   description: |
     Retrieve a checkout form with specified identifier string.
   responses:

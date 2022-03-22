@@ -1,9 +1,20 @@
 servers:
-  - url: 'https://api.rebilly.com/experimental'
-  - url: 'https://api-sandbox.rebilly.com/experimental'
-parameters:
-  - $ref: ../components/parameters/organizationId.yaml
+  - url: 'https://api-sandbox.rebilly.com/experimental/organizations/{organizationId}'
+    description: Sandbox server
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+  - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
+    description: Live server
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
 get:
+  x-products:
+    - Full
+    - Reports
   tags:
     - Reports
   summary: Retrieve a dispute delays in days report
@@ -47,12 +58,6 @@ get:
     '200':
       description: Report was retrieved successfully.
       headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
         Pagination-Limit:
@@ -67,7 +72,7 @@ get:
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: ../code_samples/JavaScript/reports@transactions-time-dispute/get.js

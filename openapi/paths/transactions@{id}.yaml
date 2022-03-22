@@ -1,23 +1,27 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
-  - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Payments
+    - Billing
+    - Core
   tags:
     - Transactions
   summary: Retrieve a Transaction
   operationId: GetTransaction
+  x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
   description: |
     Retrieve a Transaction with specified identifier string.
+  parameters:
+    - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
       description: Transaction was retrieved successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -28,7 +32,7 @@ get:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: '../code_samples/PHP/transactions@{id}/get.php'
@@ -36,10 +40,16 @@ get:
       source:
         $ref: '../code_samples/JavaScript/transactions@{id}/get.js'
 patch:
+  x-products:
+    - Full
+    - Payments
+    - Billing
+    - Core
   tags:
     - Transactions
   summary: Update a transaction
   operationId: PatchTransaction
+  x-sdk-operation-name: patch
   description: |
     Update a transaction's custom fields.
   requestBody:
@@ -47,13 +57,6 @@ patch:
   responses:
     '200':
       description: Transaction was updated successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -64,7 +67,7 @@ patch:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: '../code_samples/PHP/transactions@{id}/patch.php'

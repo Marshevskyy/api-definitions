@@ -1,0 +1,33 @@
+parameters:
+  - $ref: ../components/parameters/resourceId.yaml
+post:
+  x-products:
+    - Full
+    - Payments
+    - Billing
+    - Core
+  tags:
+    - Transactions
+  summary: Query a Transaction
+  operationId: PostTransactionQuery
+  x-sdk-operation-name: query
+  description: >
+    Query a Transaction with a specified identifier string.
+
+    The query will contact the gateway account to find the result and amount/currency.
+
+    The response should be analyzed.
+    If deemed appropriate, the transaction could be updated using the Transaction Update API.
+  responses:
+    '201':
+      description: Transaction was queried successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Transactions/TransactionQuery.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

@@ -2,14 +2,16 @@ description: The payment gateway name.
 type: string
 enum:
   - A1Gateway
+  - ACI
   - Adyen
   - Airpay
+  - AmazonPay
   - AmexVPC
-  - APAR
   - ApcoPay
   - AsiaPaymentGateway
   - AstroPayCard
   - AuthorizeNet
+  - Awepay
   - Bambora
   - BitPay
   - BlueSnap
@@ -22,10 +24,12 @@ enum:
   - Cayan
   - CCAvenue
   - Chase
+  - CheckoutCom
   - Circle
   - Citadel
   - Clearhaus
   - CODVoucher
+  - CoinGate
   - CoinPayments
   - Conekta
   - Coppr
@@ -35,6 +39,7 @@ enum:
   - DataCash
   - Dengi
   - Dragonphoenix
+  - Dimoco
   - Directa24
   - dLocal
   - EBANX
@@ -47,6 +52,7 @@ enum:
   - EPG
   - EPro
   - eZeeWallet
+  - ezyEFT
   - Finrax
   - Flexepin
   - FinTecSystems
@@ -74,7 +80,11 @@ enum:
   - Jeton
   - Khelocard
   - Konnektive
+  - loonie
   - LPG
+  - MaxiCash
+  - MercadoPago
+  - MiFinity
   - Moneris
   - MtaPay
   - MuchBetter
@@ -88,6 +98,7 @@ enum:
   - NuaPay
   - OchaPay
   - Onlineueberweisen
+  - OnRamp
   - Pagsmile
   - Panamerican
   - ParamountEft
@@ -95,39 +106,51 @@ enum:
   - PandaGateway
   - Pay4Fun
   - PayCash
+  - PayClub
   - Payeezy
   - Payflow
+  - Paynote
+  - PaymentAsia
   - PaymenTechnologies
   - PaymentsOS
   - Paymero
   - PayPal
   - Payr
   - Paysafe
+  - Paysafecard
   - Paysafecash
+  - PayTabs
   - PayULatam
   - Payvision
   - Piastrix
   - Plugnpay
+  - PostFinance
+  - PPRO
   - Prosa
+  - Rapyd
   - Realex
   - Realtime
   - Redsys
   - Rotessa
   - RPN
+  - Safecharge
   - SaltarPay
   - Sagepay
   - SeamlessChex
   - SecureTrading
+  - SecurionPay
   - Skrill
   - SmartInvoice
   - SMSVoucher
   - Sofort
   - SparkPay
   - StaticGateway
+  - STPMexico
   - Stripe
+  - Telr
   - TestProcessor
   - ToditoCash
-  - TrustPay
+  - Truevo
   - TrustsPay
   - Trustly
   - TWINT
@@ -138,8 +161,10 @@ enum:
   - VCreditos
   - Wallet88
   - Walpay
+  - WesternUnion
   - Wirecard
   - WorldlineAtosFrankfurt
   - Worldpay
+  - XPay
   - Zimpler
   - Zotapay

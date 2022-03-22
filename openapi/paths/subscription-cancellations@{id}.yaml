@@ -1,22 +1,19 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
-  - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Orders
-  summary: Retrieve an order сancellation
+  summary: Retrieve an order cancellation
   operationId: GetSubscriptionCancellation
-  description: Retrieve an order сancellation with specified identifier string.
+  x-sdk-operation-name: get
+  description: Retrieve an order cancellation with specified identifier string.
   responses:
     '200':
       description: Cancellation was retrieved successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -28,36 +25,27 @@ get:
     '404':
       $ref: ../components/responses/NotFound.yaml
 put:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Orders
   summary: Cancel an order
   operationId: PutSubscriptionCancellation
+  x-sdk-operation-name: update
   description: Cancel a subscription.
   requestBody:
     $ref: ../components/requestBodies/SubscriptionCancellation.yaml
   responses:
     '200':
       description: Cancellation was updated, the order is or will be deactivated.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Subscription/SubscriptionCancellation.yaml
     '201':
       description: Cancellation was created, the order is or will be deactivated.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -68,26 +56,63 @@ put:
       $ref: ../components/responses/Forbidden.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: '../code_samples/JavaScript/subscription-cancellations@{id}/put.js'
+patch:
+  x-products:
+    - Full
+    - Billing
+    - Core
+  tags:
+    - Orders
+  summary: Update subscription cancellation
+  operationId: PatchSubscriptionCancellation
+  x-sdk-operation-name: patch
+  description: Update a subscription cancellation, used for updating cancellation reason and description.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          allOf:
+            - properties:
+                canceledBy:
+                  readOnly: true
+                status:
+                  readOnly: true
+                churnTime:
+                  readOnly: true
+            - $ref: ../components/schemas/Subscription/SubscriptionCancellation.yaml
+    description: Patch cancellation resource.
+    required: true
+  responses:
+    '200':
+      description: Cancellation was updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Subscription/SubscriptionCancellation.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '422':
+      $ref: ../components/responses/ValidationError.yaml
 delete:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Orders
   summary: Delete a cancellation
   operationId: DeleteSubscriptionCancellation
+  x-sdk-operation-name: delete
   description: Delete an order's cancellation. Only draft can be deleted.
   responses:
     '204':
       description: Cancellaton was deleted.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

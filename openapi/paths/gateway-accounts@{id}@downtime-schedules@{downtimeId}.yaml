@@ -1,5 +1,4 @@
 parameters:
-  - $ref: ../components/parameters/organizationId.yaml
   - $ref: ../components/parameters/resourceId.yaml
   - name: downtimeId
     in: path
@@ -8,22 +7,19 @@ parameters:
     schema:
       type: string
 get:
+  x-products:
+    - Full
+    - Users
   tags:
     - Gateway Accounts
   summary: Retrieve a Gateway Downtime schedule
   operationId: GetGatewayAccountDowntimeSchedule
+  x-sdk-operation-name: getDowntimeSchedule
   description: |
     Retrieve a Gateway Downtime schedule with specified identifier string.
   responses:
     '200':
       description: Gateway Downtime schedule was retrieved successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -34,28 +30,25 @@ get:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: >-
           ../code_samples/JavaScript/gateway-accounts@{id}@downtime-schedules@{downtimeId}/get.js
 put:
+  x-products:
+    - Full
+    - Users
   tags:
     - Gateway Accounts
   summary: Update a Gateway Account downtime schedule
   operationId: PutGatewayAccountDowntimeSchedule
+  x-sdk-operation-name: updateDowntimeSchedule
   description: |
     Update a Gateway Account downtime schedule with predefined identifier string.
   responses:
     '200':
       description: Gateway Account downtime schedule was updated.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -69,42 +62,35 @@ put:
     '409':
       $ref: ../components/responses/Conflict.yaml
     '422':
-      description: Invalid data was sent.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/InvalidError.yaml
+      $ref: ../components/responses/ValidationError.yaml
   requestBody:
     $ref: ../components/requestBodies/GatewayAccountDowntimeSchedule.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: >-
           ../code_samples/JavaScript/gateway-accounts@{id}@downtime-schedules@{downtimeId}/put.js
 delete:
+  x-products:
+    - Full
+    - Users
   tags:
     - Gateway Accounts
   summary: Delete a Gateway Account downtime schedule
   operationId: DeleteGatewayAccountDowntimeSchedule
+  x-sdk-operation-name: deleteDowntimeSchedule
   description: |
     Delete a Gateway Account downtime schedule.
   responses:
     '204':
       description: Gateway Account downtime schedule was deleted.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: JavaScript
       source:
         $ref: >-

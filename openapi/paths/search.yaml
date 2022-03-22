@@ -1,14 +1,19 @@
-parameters:
-  - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Core
   tags:
     - Search
   summary: Search merchant data
   operationId: GetSearch
+  x-sdk-operation-name: get
   description: >
     Search merchant's data to return resources such as customers, invoices,
     orders, transactions.
   parameters:
+    - $ref: ../components/parameters/collectionSort.yaml
+    - $ref: ../components/parameters/collectionLimit.yaml
+    - $ref: ../components/parameters/collectionOffset.yaml
     - name: q
       in: query
       description: The default search. It will search across resources and many fields.
@@ -18,12 +23,6 @@ get:
     '200':
       description: Results keyed by resource.
       headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
         Pagination-Limit:

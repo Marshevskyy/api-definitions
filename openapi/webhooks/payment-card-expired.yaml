@@ -1,7 +1,12 @@
 summary: Payment card expired
 operationId: payment-card-expired
+x-products:
+  - Full
+  - Core
+  - Billing
+  - Payments
 tags:
-  - Payment Cards
+  - Payment Instruments
 requestBody:
   $ref: ../components/requestBodies/Webhooks/PaymentCard.yaml
 responses:

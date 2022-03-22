@@ -1,22 +1,17 @@
-parameters:
-  - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Core
   tags:
     - Customer Authentication
   summary: Read current authentication options
   operationId: GetAuthenticationOption
+  x-sdk-operation-name: getAuthOptions
   description: |
     Read current authentication options.
   responses:
     '200':
       description: Current authentication options was retrieved successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -28,7 +23,7 @@ get:
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: ../code_samples/PHP/authentication-options/get.php
@@ -36,10 +31,14 @@ get:
       source:
         $ref: ../code_samples/JavaScript/authentication-options/get.js
 put:
+  x-products:
+    - Full
+    - Core
   tags:
     - Customer Authentication
   summary: Change authentication options
   operationId: PutAuthenticationOption
+  x-sdk-operation-name: updateAuthOptions
   description: |
     Change options.
   requestBody:
@@ -53,13 +52,6 @@ put:
   responses:
     '200':
       description: Authentication Options were updated.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -71,7 +63,7 @@ put:
       $ref: ../components/responses/Forbidden.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: ../code_samples/PHP/authentication-options/put.php

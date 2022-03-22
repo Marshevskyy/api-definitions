@@ -1,25 +1,27 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
-  - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Invoices
   summary: Retrieve an invoice
   operationId: GetInvoice
+  x-sdk-operation-name: get
+  security:
+    - SecretApiKey: []
+    - JWT: []
+    - ApplicationJWT: []
   description: |
     Retrieve an invoice with specified identifier string.
   parameters:
     - $ref: ../components/parameters/mediaTypeJsonPdf.yaml
+    - $ref: ../components/parameters/collectionExpand.yaml
   responses:
     '200':
       description: Invoice was retrieved successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -33,7 +35,7 @@ get:
       $ref: ../components/responses/Forbidden.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: '../code_samples/PHP/invoices@{id}/get.php'
@@ -41,10 +43,15 @@ get:
       source:
         $ref: '../code_samples/JavaScript/invoices@{id}/get.js'
 put:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Invoices
   summary: Create or update an invoice with predefined ID
   operationId: PutInvoice
+  x-sdk-operation-name: update
   description: |
     Create or update an invoice with predefined identifier string.
   requestBody:
@@ -52,26 +59,12 @@ put:
   responses:
     '200':
       description: Invoice was updated.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Invoices/Invoice.yaml
     '201':
       description: Invoice was created.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -84,7 +77,7 @@ put:
       $ref: ../components/responses/NotFound.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: '../code_samples/PHP/invoices@{id}/put.php'

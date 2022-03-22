@@ -1,10 +1,11 @@
-parameters:
-  - $ref: ../../components/parameters/organizationId.yaml
 post:
+  x-products:
+    - Storefront
   tags:
     - Email verification
   summary: Resend email verification
   operationId: StorefrontPostAccountResendVerification
+  x-sdk-operation-name: resendEmailVerification
   security:
     - PublishableApiKey: []
   description: |

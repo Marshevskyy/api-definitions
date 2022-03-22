@@ -1,10 +1,11 @@
-parameters:
-  - $ref: ../../components/parameters/organizationId.yaml
 post:
+  x-products:
+    - Storefront
   tags:
     - Authentication
   summary: Destroys the user's current session
   operationId: StorefrontPostLogout
+  x-sdk-operation-name: logout
   security:
       - CustomerJWT: []
   description: |

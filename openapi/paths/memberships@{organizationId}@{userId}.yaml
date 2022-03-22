@@ -12,22 +12,19 @@ parameters:
     schema:
       $ref: ../components/schemas/ResourceId.yaml
 get:
+  x-products:
+    - Full
+    - Users
   tags:
     - Memberships
   summary: Retrieve the membership
   operationId: GetMembership
+  x-sdk-operation-name: get
   description: |
     Retrieve the membership using organization and user identifiers.
   responses:
     '200':
       description: Membership was retrieved successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -39,10 +36,14 @@ get:
     '404':
       $ref: ../components/responses/NotFound.yaml
 put:
+  x-products:
+    - Full
+    - Users
   tags:
     - Memberships
   summary: Create or update membership
   operationId: PutMembership
+  x-sdk-operation-name: update
   description: |
     Create or update membership using organization and user identifiers.
     Only membership's owner can add other users in the membership.
@@ -57,30 +58,21 @@ put:
               description: The memberships's permissions. See the format in example. Use wildcard `*` for full access.
               allOf:
                 - $ref: ../components/schemas/AclPermissions.yaml
+            roleIds:
+              type: array
+              description: The membership's roles identifiers.
+              items:
+                type: string
     required: true
   responses:
     '200':
       description: Membership was updated.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Membership.yaml
     '201':
       description: Membership was created.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -92,22 +84,19 @@ put:
     '409':
       $ref: ../components/responses/Conflict.yaml
 delete:
+  x-products:
+    - Full
+    - Users
   tags:
     - Memberships
   summary: Delete the membership
   operationId: DeleteMembership
+  x-sdk-operation-name: delete
   description: |
     Delete the membership using organization and user identifiers.
   responses:
     '204':
       description: Membership message was deleted.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
     '401':
       $ref: ../components/responses/Unauthorized.yaml
     '403':

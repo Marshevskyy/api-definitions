@@ -1,10 +1,13 @@
-parameters:
-  - $ref: ../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Customer Authentication
   summary: Retrieve a list of auth tokens
   operationId: GetAuthenticationTokenCollection
+  x-sdk-operation-name: getAllAuthTokens
   description: |
     Retrieve a list of auth tokens.
   parameters:
@@ -14,12 +17,6 @@ get:
     '200':
       description: A list of auth tokens was retrieved successfully.
       headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
         Pagination-Total:
           $ref: ../components/headers/Pagination-Total.yaml
         Pagination-Limit:
@@ -37,7 +34,7 @@ get:
       $ref: ../components/responses/Unauthorized.yaml
     '403':
       $ref: ../components/responses/Forbidden.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: ../code_samples/PHP/authentication-tokens/get.php
@@ -45,10 +42,15 @@ get:
       source:
         $ref: ../code_samples/JavaScript/authentication-tokens/get.js
 post:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Customer Authentication
   summary: Login
   operationId: PostAuthenticationToken
+  x-sdk-operation-name: login
   description: |
     Login a customer.
   security:
@@ -66,13 +68,6 @@ post:
   responses:
     '201':
       description: Login successful.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:
@@ -84,7 +79,7 @@ post:
       $ref: ../components/responses/Forbidden.yaml
     '422':
       $ref: ../components/responses/ValidationError.yaml
-  x-code-samples:
+  x-codeSamples:
     - lang: PHP
       source:
         $ref: ../code_samples/PHP/authentication-tokens/post.php

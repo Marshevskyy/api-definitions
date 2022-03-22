@@ -1,10 +1,11 @@
-parameters:
-  - $ref: ../../components/parameters/organizationId.yaml
 get:
+  x-products:
+    - Storefront
   tags:
-    - Transaction
+    - Transactions
   summary: Retrieve a list of transactions
   operationId: StorefrontGetTransactionCollection
+  x-sdk-operation-name: getAll
   security:
     - CustomerJWT: []
   description: |

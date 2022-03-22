@@ -1,11 +1,15 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
-  - $ref: ../components/parameters/organizationId.yaml
 post:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Orders
   summary: Issue an interim invoice for a subscription order
   operationId: PostSubscriptionInterimInvoice
+  x-sdk-operation-name: createInterimInvoice
   description: >
     Issue an interim invoice for a subscription, typically used in conjunction.
     with plan changes and pro rata adjustments.
@@ -24,13 +28,6 @@ post:
   responses:
     '201':
       description: Invoice was created.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:

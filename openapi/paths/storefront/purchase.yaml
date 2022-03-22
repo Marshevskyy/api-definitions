@@ -1,10 +1,11 @@
-parameters:
-  - $ref: ../../components/parameters/organizationId.yaml
 post:
+  x-products:
+    - Storefront
   tags:
-    - Purchase
+    - Purchases
   summary: Make a purchase
   operationId: StorefrontPostPurchase
+  x-sdk-operation-name: purchase
   description: |
     Purchase can be accomplished both with and without Authentication.
     Purchase via pre-created Payment Instrument is only available with Authentication.

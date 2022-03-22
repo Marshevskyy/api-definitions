@@ -8,41 +8,29 @@ properties:
     readOnly: true
     allOf:
       - $ref: ../ResourceId.yaml
-  customerId:
-    description: The сustomer's ID.
-    allOf:
-      - $ref: ../ResourceId.yaml
   fileId:
     deprecated: true
     description: Linked file object id.
     allOf:
       - $ref: ../ResourceId.yaml
   fileIds:
-    description: Linked file object id's.
+    description: >-
+      Linked file object id's.
+
+
+      Files uploaded for identity-proof must have following corresponding tags attached `['kyc', 'id-front']`, `['kyc', 'id-back']`, `['kyc', 'face-proof']` in order to be properly recognized as identity-proof files.
     type: array
     items:
       allOf:
         - $ref: ../ResourceId.yaml
   documentType:
     description: Document type submitted for validation, only identity-proof type is analyzed in an automated manner.
-    type: string
-    enum:
-      - identity-proof
-      - address-proof
-      - funds-proof
+    allOf:
+      - $ref: ../KycDocument/KycDocumentTypes.yaml
   documentSubtype:
      description: Document subtype submitted for validation.
-     type: string
-     enum:
-      - passport
-      - id-card
-      - driver-license
-  matchLevel:
-    description: The level of strictness for the document matches.
-    type: integer
-    minimum: 1
-    maximum: 2
-    example: 2
+     allOf:
+       - $ref: ../KycDocument/KycDocumentSubtypes.yaml
   status:
     description: Status of the validation.
     type: string
@@ -52,11 +40,21 @@ properties:
       - in-progress
       - accepted
       - rejected
-  reason:
-    description: Reason for uploading.
-    type: string
+      - archived
+    x-enumDescriptions:
+      pending: Waiting to be reviewed or analyzed
+      in-progress: Being analyzed by Rebilly's AI
+      accepted: Accepted by AI or a human
+      rejected: Rejected by AI or a human
+      archived: Archived by Rebilly's AI
   rejectionReason:
     $ref: ../KycDocument/KycDocumentRejection.yaml
+  requestId:
+    readOnly: true
+    nullable: true
+    description: KYC request identifier string.
+    allOf:
+      - $ref: ../ResourceId.yaml
   createdTime:
     description: Creation date/time.
     allOf:
@@ -69,20 +67,11 @@ properties:
     description: Processing date/time.
     allOf:
       - $ref: ../ServerTimestamp.yaml
-  reviewerId:
-    description: Reviewer's user ID.
-    type: string
-    nullable: true
+  _links:
+    type: array
+    description: The links related to resource.
     readOnly: true
-    allOf:
-      - $ref: ../ResourceId.yaml
-  reviewerName:
-    description: Reviewer's first and last name.
-    type: string
-    nullable: true
-    readOnly: true
-  reviewTime:
-    description: Date and time of manual review.
-    nullable: true
-    allOf:
-      - $ref: ../ServerTimestamp.yaml
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ../Links/SelfLink.yaml

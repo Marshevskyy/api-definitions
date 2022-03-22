@@ -1,11 +1,15 @@
 parameters:
   - $ref: ../components/parameters/resourceId.yaml
-  - $ref: ../components/parameters/organizationId.yaml
 post:
+  x-products:
+    - Full
+    - Billing
+    - Core
   tags:
     - Invoices
   summary: Reissue an invoice
   operationId: PostInvoiceReissuance
+  x-sdk-operation-name: reissue
   description: >
     Reissue an invoice with specified identifier string. It must be issued.
     (status must be `unpaid` or `past-due`).
@@ -19,13 +23,6 @@ post:
   responses:
     '201':
       description: Invoice was reissued successfully.
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
       content:
         application/json:
           schema:

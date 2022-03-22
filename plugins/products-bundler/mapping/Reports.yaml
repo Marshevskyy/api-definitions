@@ -1,0 +1,59 @@
+info:
+  version: '0.1'
+  title: Rebilly Experimental Reports API
+  description: |
+    # Introduction
+
+    This API is experimental and likely to change.  We would appreciate
+    feedback.
+
+    # Authentication
+
+    This topic describes the different forms of authentication that are available in the Rebilly API, and how to use them.
+
+    Rebilly offers four forms of authentication: secret key, publishable key,
+    JSON Web Tokens, and public signature key.
+
+    - Secret API key: Use to make requests from the server side. Never share these keys. Keep them guarded and secure.
+    - Publishable API key: Use in your client-side code to tokenize payment information.
+    - JWT: Use to make short-life tokens that expire after a set period of time.
+
+    <!-- ReDoc-Inject: <security-definitions> -->
+
+    ## Manage API keys
+
+    To create or manage API keys, select one of the following:
+
+    - Use the Rebilly UI: In the left navigation bar, **Automations**, **Integrations**, **Custom integrations**, then click **API keys**.
+    - Use the Rebilly API: go to [API Keys](https://user-api-docs.rebilly.com/#tag/API-Keys).
+
+    For more information, see [API keys](https://www.rebilly.com/docs/concepts-and-features/concept/api-keys).
+
+    ## Javascript SDK
+
+    The [Javascript SDK](https://github.com/Rebilly/rebilly-js-sdk) is maintained
+    within Github, and contains the installation and usage instructions in the Readme file.
+    SDK code examples are included in these docs.
+
+servers:
+  - url: 'https://api-sandbox.rebilly.com/experimental/organizations/{organizationId}'
+    description: Sandbox server
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+  - url: 'https://api.rebilly.com/experimental/organizations/{organizationId}'
+    description: Live server
+    variables:
+      organizationId:
+        default: unknown
+        description: Your organization ID.
+
+x-tagGroups:
+  - name: Reports
+    tags:
+      - Histograms
+      - Reports
+      - Data Exports
+      - Orders
+      - Customers
